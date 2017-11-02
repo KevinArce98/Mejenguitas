@@ -1,0 +1,338 @@
+/**
+*
+* CSS Global
+*
+**/
+
+
+.control-label {
+    padding-top: 5px !important;
+}
+
+h2{
+    font-family: 'Oxygen', sans-serif !important;
+    margin-bottom: 5px !important;
+}
+#containerTable{
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 2px 7px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 7px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 7px 0px rgba(0,0,0,0.75);
+}
+hr{
+    padding: 1px;
+    border-radius: 5px;
+    background: rgba(73,155,234,1);
+    background: -moz-linear-gradient(top, rgba(73,155,234,1) 0%, rgba(32,124,229,1) 45%, rgba(32,124,229,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(73,155,234,1)), color-stop(45%, rgba(32,124,229,1)), color-stop(100%, rgba(32,124,229,1)));
+    background: -webkit-linear-gradient(top, rgba(73,155,234,1) 0%, rgba(32,124,229,1) 45%, rgba(32,124,229,1) 100%);
+    background: -o-linear-gradient(top, rgba(73,155,234,1) 0%, rgba(32,124,229,1) 45%, rgba(32,124,229,1) 100%);
+    background: -ms-linear-gradient(top, rgba(73,155,234,1) 0%, rgba(32,124,229,1) 45%, rgba(32,124,229,1) 100%);
+    background: linear-gradient(to bottom, rgba(73,155,234,1) 0%, rgba(32,124,229,1) 45%, rgba(32,124,229,1) 100%);
+}
+
+.table{
+    padding: 10px !important;
+    margin-bottom: 0 !important;
+}
+
+.table .thead-dark tr th{
+    color: #fff;
+    background-color: #212529 !important;
+}
+.table .thead-light tr th{
+    color: #3F3E3E;
+    background-color: #CAC7C7 !important;
+}
+.table-hover tr:hover{
+    background-color: #e9ecef !important;
+}
+table thead tr th{
+    cursor: default;
+}
+table tbody tr th{
+    cursor: default;
+}
+
+tr.table-success{
+    background-color: #A6E5B4;
+}
+tr.table-danger{
+    background-color: #F2ACB3;
+}
+
+div.datepicker.datepicker-dropdown.dropdown-menu{
+    background-color: #FAFAFA !important;
+}
+
+/* CSS NavBar */
+
+.navbar-default{
+	background-color: #073AA1 !important;
+}
+
+.navbar-default a{
+	color: #fff !important;
+}
+
+.navbar-default a:hover{
+	color: #D2D2D2 !important;
+}
+
+.navbar-nav>.open>a{
+background-color: #073AA1 !important;
+}
+
+.dropdown-menu{
+	background-color: #0E3480 !important;
+}
+
+.dropdown-menu a:hover{
+	background-color: #FFF !important;
+	color: #0E3480 !important;
+}
+.navbar-toggle:hover{
+	background-color: #fff !important;
+}
+li>a>span.badge{
+    background-color: #08C97E
+}
+
+/* CSS SideBar */
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    position: absolute;
+    left: 250px;
+    z-index: 1000;
+    overflow-y: auto;
+    margin-left: -250px;
+    width: 0;
+    height: 100%;
+    background-color: #E5E5E5;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    top: 50px;
+}
+
+.sidebar-nav>li:nth-child(odd) {
+    background-color:#BEBEBE;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    padding: 15px;
+    width: 100%;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    list-style: none;
+    margin-top: 235px;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    color: #073AA1;
+    text-decoration: none;
+}
+
+.sidebar-nav li a:hover {
+    color: #0B2A48;
+    box-shadow:1px 1px 10px 1px #39D4CD inset;
+    transition: padding-left 0.2s linear;
+    padding-left: 40px;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    background: none;
+    color: #fff;
+}
+@media (max-width: 767px) {
+    .sidebar-nav {
+        width: 250px;
+    }
+}
+
+@media (min-width: 768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 300px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+#userName{
+    color: #fff;
+}
+.logo>img {
+    margin-top: 30px;
+    padding: 1px;
+    border: 2px solid #04CA4E;
+    border-radius: 100%;
+    background-color: #fff;
+}
+.logo {
+    min-height:200px;
+    color:#afb1b5;
+}
+#nameUser{
+	color: #4a4a4a !important;
+	font-family: 'Signika', sans-serif !important;
+}
+.Add-friend
+{
+  background-color:#04CA4E;
+  border: 1px solid #50e6df;
+  color:#eee;
+}
+.btn.Add-friend:hover,.btn.Add-friend:active,.btn.Add-friend:active:focus,.btn.Add-friend:active:hover,.btn.Add-friend:visited,.btn.Add-friend:focus
+{
+  background-color:#04CA4E;
+  border: 0.5px solid transparent;
+  color:white;
+  outline:none;
+  font-weight:600;
+}
+
+/*
+*
+*  CSS for the page form request
+*
+**/
+
+textarea {
+   resize: none !important;
+}
+/* create alert for the message*/
+.alert-success {
+    margin-top: 10px;
+    padding: 11px;
+    background-color: #28a745; 
+    color: white;
+    margin-bottom: 15px;
+    display: block;
+    -webkit-transition: all .10s ease;
+       -moz-transition: all .10s ease;
+        -ms-transition: all .10s ease;
+         -o-transition: all .10s ease;
+            transition: all .10s ease;
+}
+
+.alert-danger {
+    margin-top: 10px;
+    padding: 11px;
+    background-color: #DE0610; 
+    color: white;
+    margin-bottom: 15px;
+    display: block;
+    -webkit-transition: all .10s ease;
+       -moz-transition: all .10s ease;
+        -ms-transition: all .10s ease;
+         -o-transition: all .10s ease;
+            transition: all .10s ease;
+}
+
+/* The close button */
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    -webkit-transition: all .10s ease;
+       -moz-transition: all .10s ease;
+        -ms-transition: all .10s ease;
+         -o-transition: all .10s ease;
+            transition: all .10s ease;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+    color: black;
+}
+
+
+/*
+*
+*   CSS CRUD Request
+*/
+
+#textTitle{
+    font-size: 1.2em;
+}
+.accions{
+     width: 70%;
+}
+
+.boton{
+    margin-top: 3px;
+    margin-bottom: 3px;
+}

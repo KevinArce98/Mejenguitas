@@ -1,0 +1,14 @@
+h1{
+	margin-top: 0px;
+}
+
+div a.btn{
+	margin-top: 5px;
+}
+
+
+@media (max-width: 535px) {
+	div.row div.text-right{
+		margin-top: 15px;
+	} 
+}
