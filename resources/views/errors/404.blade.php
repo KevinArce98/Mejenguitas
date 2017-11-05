@@ -5,35 +5,25 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Page Not Found</title>
+        <title>Página no encontrada</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Oxygen|Signika" rel="stylesheet">
 
         <!-- Styles -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <style>
             html, body {
                 background-color: #fff;
                 color: #636b6f;
-                font-family: 'Raleway', sans-serif;
+                font-family: 'Signika', sans-serif;
                 font-weight: 100;
-                height: 100vh;
-                margin: 0;
+
             }
 
             .full-height {
                 margin-top: 250px;
                 margin-bottom: 15px;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
             }
 
             .content {
@@ -55,15 +45,18 @@
     <body>
         <div class="container">
             <div class="row">
-                <div class="flex-center position-ref full-height">
+                <div class="full-height">
                     <div class="content">
                         <div class="title">
-                            Lo sentimos, la página que está buscando no se pudo encontrar.</div>
+                            Lo sentimos, la página que está buscando no se pudo encontrar.
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row center-block">
-                    <a href="{{ route('/') }}" class="btn btn-default text-center" id="boton">Volver a la pagina de inicio</a>
+            <div class="row">
+                   <div class="col-sm-5 col-md-offset-3">
+                        <a href="{{ route('home') }}" class="btn btn-default text-center" id="boton">Volver a la pagina de inicio</a>
+                   </div>
             </div>
         </div>
         

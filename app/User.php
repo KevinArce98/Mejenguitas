@@ -68,4 +68,13 @@ class User extends Authenticatable
             return true;
         }
     }
+
+    public function getUrlAttribute()
+    {
+        if (substr($this->avatar, 0, 4) == "http") {
+            return $this->avatar;
+        }
+
+        return '/img/users/' . $this->avatar;
+    }
 }

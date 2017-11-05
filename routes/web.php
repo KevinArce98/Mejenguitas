@@ -24,8 +24,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('requests', 'RequestAdminController');
 
+Route::get('matchs/joined', 'MatchController@matchsJoined')->name('matchs.matchsJoined');
 Route::resource('matchs', 'MatchController');
 
 Route::resource('message', 'MessageController');
+
+Route::resource('user', 'UserController');
 
 

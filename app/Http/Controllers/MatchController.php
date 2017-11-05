@@ -103,7 +103,7 @@ class MatchController extends Controller
      */
     public function show(Match $match)
     {
-        //
+        
     }
 
     /**
@@ -138,5 +138,10 @@ class MatchController extends Controller
     public function destroy(Match $match)
     {
         //
+    }
+
+    public function matchsJoined()
+    {
+        return view('matchs.matchsJoined');
     }
 }

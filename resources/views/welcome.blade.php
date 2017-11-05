@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Bienvenido</title>
-	<link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Oxygen|Signika" rel="stylesheet">
+	<script src="https://use.fontawesome.com/899a2e27b0.js"></script>
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-	<link rel="stylesheet" href="{{ asset('css/welcome.css')}}">
 	<link rel="stylesheet" href="{{ asset('css/main.css')}}">
+	<link rel="stylesheet" href="{{ asset('css/welcome.css')}}">
 </head>
 <body>
 	<nav class="navbar navbar-default" role="navigation">
@@ -44,8 +44,18 @@
 	</nav>
 	<div class="container">
 		<div class="row">
-			<div class="content">
-				<h1 id="title">Mejenguitas</h1>
+			<div class="col-md-7 text-center">
+				<h2 class="texts">Bienvenido</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2 col-md-offset-5 text-center">
+				<h3 class="texts">a</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-offset-5 col-md-7 text-center">
+				<h1 class="texts" id="title"><strong>Mejenguitas</strong></h1>
 			</div>
 		</div>
 	</div>

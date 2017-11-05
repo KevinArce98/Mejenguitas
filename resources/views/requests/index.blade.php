@@ -41,7 +41,7 @@ Solicitudes
 								<td>
 									<div class="accions">
 										<div class="row">
-
+											<div class="col-sm-1">
 												<form action="{{ route('requests.update', $request->email) }}" method="post" >
 													{!! method_field('PUT') !!}
 													{{ csrf_field() }}
@@ -53,6 +53,8 @@ Solicitudes
 														<i class='fa fa-check' aria-hidden='true'></i>
 													</button>
 												</form>
+											</div>
+											<div class="col-sm-1">
 												<form action="{{ route('requests.update', $request->email) }}" method="post">
 													{!! method_field('PUT') !!}
 													{{ csrf_field() }}
@@ -61,10 +63,10 @@ Solicitudes
 														@if($request->status === 'C' || $request->status === 'D')
 														{{' disabled'}}
 														@endif>
-														<i class='fa fa-times' aria-hidden='true'></i>
+														<i class='fa fa-times' id="equis" aria-hidden='true'></i>
 													</button>
 												</form>
-
+											</div>
 										</div>
 									</div>
 								</td>
