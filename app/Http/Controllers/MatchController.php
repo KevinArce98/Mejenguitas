@@ -3,6 +3,9 @@
 namespace Mejenguitas\Http\Controllers;
 
 use Mejenguitas\Match;
+use Mejenguitas\Role;
+use Mejenguitas\User;
+use Mejenguitas\RequestAdmin;
 use Illuminate\Http\Request;
 use Alert;
 use DB;
@@ -22,6 +25,7 @@ class MatchController extends Controller
      */
     public function index()
     {
+       
         $matches = Match::paginate(10);
         return view('home', compact('matches'));
     }

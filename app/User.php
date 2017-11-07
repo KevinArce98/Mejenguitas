@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\DB;
 use Mejenguitas\Role;
+use Mejenguitas\RequestAdmin;
 
 class User extends Authenticatable
 {
@@ -33,6 +34,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'assigned_roles');
     }
 
+    public function request()
+    {
+        return $this->hasOne(RequestAdmin::class);
+    }
 
     public function hasRoles(array $roles)
     {

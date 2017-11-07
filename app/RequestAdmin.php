@@ -3,6 +3,7 @@
 namespace Mejenguitas;
 
 use Illuminate\Database\Eloquent\Model;
+use Mejenguitas\User;
 
 class RequestAdmin extends Model
 {
@@ -29,4 +30,9 @@ class RequestAdmin extends Model
     protected $hidden = [
         'user',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
