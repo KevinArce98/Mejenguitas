@@ -20,7 +20,7 @@
 			</ul>
 		</div>
 	@endif
-<form action="{{ route('matchs.store') }}" method="POST" role="form">
+<form action="{{ route('matchs.store', auth()->user()->id) }}" method="POST" role="form">
 	{{ csrf_field() }}
 	<div class="form-group">
 		<label for="name" class="control-label">Nombre:</label>
@@ -65,7 +65,7 @@
 	</div>
 	<div class="form-group text-right">
 		<button type="submit" class="btn btn-outline-primary">Crear Mejenga</button>
-		<a href="{{route('matchs.index')}}" class="btn btn-outline-warning">Cancelar</a>
+		<a href="{{route('matchs.mymatchs', auth()->user()->id)}}" class="btn btn-outline-warning">Cancelar</a>
 	</div>
 </form>
 
@@ -91,7 +91,8 @@
       function initMap() {
         map = new google.maps.Map(document.getElementById('map-canvas'), {
           center: {lat: -34.397, lng: 150.644},
-          zoom: 8
+          zoom: 8,
+          disableDefaultUI: true
         });
 
         var marker = new google.maps.Marker({

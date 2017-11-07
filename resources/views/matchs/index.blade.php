@@ -15,7 +15,7 @@ Mis Mejengas
 			<h1>Mis Mejengas</h1>
 		</div>
 		<div class="col-xs-6 text-right">
-			<a href="{{ route('matchs.create') }}" class="btn btn-outline-success">Crear Mejenga</a>
+			<a href="{{ route('matchs.create', auth()->user()->id) }}" class="btn btn-outline-success">Crear Mejenga</a>
 		</div>
 	</div>
 	<hr>

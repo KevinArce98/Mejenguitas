@@ -20,12 +20,16 @@ Auth::routes();
 Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
 Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'MatchController@index')->name('home');
 
 Route::resource('requests', 'RequestAdminController');
 
+Route::get('matchs/{id}/index', 'MatchController@indexForUser')->name('matchs.mymatchs');
 Route::get('matchs/joined', 'MatchController@matchsJoined')->name('matchs.matchsJoined');
-Route::resource('matchs', 'MatchController');
+Route::get('matchs/{id}/create', 'MatchController@create')->name('matchs.create');
+Route::post('matchs/{id}', 'MatchController@store')->name('matchs.store');
+Route::get('matchs/{id}', 'MatchController@show')->name('matchs.show');
+
 
 Route::resource('message', 'MessageController');
 

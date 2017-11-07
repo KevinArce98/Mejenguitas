@@ -21,4 +21,8 @@ class Match extends Model
    public function convertTimeToSQL($time){
    		return \DateTime::createFromFormat('h:iA', $time)->format('H:i:s');
    }
+
+   public function convertTimestamp($date){
+         return \DateTime::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y h:iA');
+   }
 }

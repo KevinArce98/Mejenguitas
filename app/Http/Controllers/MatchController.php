@@ -13,7 +13,7 @@ class MatchController extends Controller
       public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('roles:mod');
+        $this->middleware('roles:mod', ['except' => ['matchsJoined', 'index']]);
     }
     /**
      * Display a listing of the resource.
@@ -22,9 +22,13 @@ class MatchController extends Controller
      */
     public function index()
     {
-      /*  $sql = "SELECT id, name, players, price, DATE_FORMAT(date, '%d/%m/%Y') AS date, DATE_FORMAT(hour, '%h:%i%p') AS time, site, lat, lng, info FROM `matches`";
-        $matches = DB::select($sql)->simplePaginate(5);*/
-        $matches = Match::paginate(5);
+        $matches = Match::paginate(10);
+        return view('home', compact('matches'));
+    }
+
+    public function indexForUser($id)
+    {
+        $matches = Match::where('user_id', '=', $id)->paginate(5);
         return view('matchs.index', compact('matches'));
     }
 
@@ -44,7 +48,7 @@ class MatchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         // Validations
         //Messages for validation
@@ -79,6 +83,7 @@ class MatchController extends Controller
         // Create Object and Save it
         $match = new Match;
         $match->name = $request->name;
+        $match->user_id = $id;
         $match->players = $request->players;
         $match->price = $request->price;
         $match->hour = $match->convertTimeToSQL($request->hour);
@@ -91,8 +96,8 @@ class MatchController extends Controller
 
 
         Alert::success('Mejenga Creada exitosamente.');
-        $matches = Match::paginate(5);
-        return redirect()->route('matchs.index', compact('matches'));
+        $matches = Match::where('user_id', '=', $id)->paginate(5);
+        return redirect()->route('matchs.mymatchs', compact('id', 'matches'));
     }
 
     /**
@@ -101,9 +106,10 @@ class MatchController extends Controller
      * @param  \Mejenguitas\Match  $match
      * @return \Illuminate\Http\Response
      */
-    public function show(Match $match)
+    public function show($id)
     {
-        
+        $match = Match::findOrFail($id);
+        return view('matchs.show', compact('match'));
     }
 
     /**

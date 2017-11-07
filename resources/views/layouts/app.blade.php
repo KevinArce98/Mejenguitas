@@ -105,9 +105,9 @@
                             <li>
                                 <a href="{{ route('matchs.matchsJoined') }}"><i class="fa fa-futbol-o" aria-hidden="true"></i> Mis Mejengas</a>
                             </li>
-                            @if(auth()->user()->isAdmin())
+                            @if(auth()->user()->isMod())
                                 <li>
-                                    <a href="{{ route('matchs.index') }}"><i class="fa fa-check-square-o" aria-hidden="true"></i> Mejengas Creadas</a>
+                                    <a href="{{ route('matchs.mymatchs', auth()->user()->id) }}"><i class="fa fa-check-square-o" aria-hidden="true"></i> Mejengas Creadas</a>
                                 </li>
                             @endif
                             @if(auth()->user()->requestHave(auth()->user()->id))        

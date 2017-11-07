@@ -15,6 +15,7 @@ class CreateTableMatch extends Migration
     {
         Schema::create('matches', function (Blueprint $table) {
              $table->increments('id');
+             $table->integer('user_id');
              $table->string('name');
              $table->integer('players');
              $table->integer('price');
@@ -23,8 +24,10 @@ class CreateTableMatch extends Migration
              $table->string('site');
              $table->double('lat');
              $table->double('lng');
-             $table->longText('info')->nullable()->default('');
+             $table->longText('info')->nullable();
             $table->timestamps();
+
+              $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
