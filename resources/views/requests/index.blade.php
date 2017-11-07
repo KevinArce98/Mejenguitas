@@ -34,15 +34,15 @@ Solicitudes
 							        class="table-danger" 
 							        @break 
 							@endswitch>
-								<td>{{ $request->email }}</td>
-								<td>{{ $request->name }}</td>
+								<td>{{ $request->user->email }}</td>
+								<td>{{ $request->user->name }}</td>
 								<td>{{ $request->message}}</td>
 
 								<td>
 									<div class="accions">
 										<div class="row">
 											<div class="col-sm-1">
-												<form action="{{ route('requests.update', $request->email) }}" method="post" >
+												<form action="{{ route('requests.update', $request->user->id) }}" method="post" >
 													{!! method_field('PUT') !!}
 													{{ csrf_field() }}
 													<input type="hidden" name="status" value="C">
@@ -55,7 +55,7 @@ Solicitudes
 												</form>
 											</div>
 											<div class="col-sm-1">
-												<form action="{{ route('requests.update', $request->email) }}" method="post">
+												<form action="{{ route('requests.update', $request->user->id) }}" method="post">
 													{!! method_field('PUT') !!}
 													{{ csrf_field() }}
 													<input type="hidden" name="status" value="D">

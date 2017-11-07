@@ -6,6 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Match extends Model
 {
+
+   /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'players', 'price', 'hour', 'date', 'site', 'lat', 'lng'
+    ];
+
+
    public function convertDateToNormal($date){
    		return \DateTime::createFromFormat('Y-m-d', $date)->format('d/m/Y');
    }

@@ -24,9 +24,9 @@ Route::get('/home', 'MatchController@index')->name('home');
 
 Route::resource('requests', 'RequestAdminController');
 
-Route::get('matchs/{id}/index', 'MatchController@indexForUser')->name('matchs.mymatchs');
+Route::get('user/{id}/matchs/index', 'MatchController@indexForUser')->name('matchs.mymatchs');
 Route::get('matchs/joined', 'MatchController@matchsJoined')->name('matchs.matchsJoined');
-Route::get('matchs/{id}/create', 'MatchController@create')->name('matchs.create');
+Route::get('user/{id}/matchs/create', 'MatchController@create')->name('matchs.create');
 Route::post('matchs/{id}', 'MatchController@store')->name('matchs.store');
 Route::get('matchs/{id}', 'MatchController@show')->name('matchs.show');
 

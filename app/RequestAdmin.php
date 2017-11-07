@@ -19,7 +19,7 @@ class RequestAdmin extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'message' 
+        'message', 'user_id'
     ];
 
     /**
@@ -28,7 +28,7 @@ class RequestAdmin extends Model
      * @var array
      */
     protected $hidden = [
-        'user',
+        'user_id',
     ];
 
     public function user()

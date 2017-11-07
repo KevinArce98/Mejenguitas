@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\DB;
 use Mejenguitas\Role;
 use Mejenguitas\RequestAdmin;
+use Mejenguitas\Match;
 
 class User extends Authenticatable
 {
@@ -37,6 +38,11 @@ class User extends Authenticatable
     public function request()
     {
         return $this->hasOne(RequestAdmin::class);
+    }
+
+    public function matchs()
+    {
+        return $this->hasMany(Match::class);    
     }
 
     public function hasRoles(array $roles)

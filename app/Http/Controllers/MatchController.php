@@ -25,13 +25,14 @@ class MatchController extends Controller
      */
     public function index()
     {
-       
         $matches = Match::paginate(10);
         return view('home', compact('matches'));
     }
 
     public function indexForUser($id)
     {
+        $user = User::findOrFail($id);
+        $this->authorize($user);
         $matches = Match::where('user_id', '=', $id)->paginate(5);
         return view('matchs.index', compact('matches'));
     }
@@ -41,8 +42,10 @@ class MatchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
+        $user = User::findOrFail($id);
+        $this->authorize($user);
         return view('matchs.create');
     }
 
@@ -55,6 +58,8 @@ class MatchController extends Controller
     public function store(Request $request, $id)
     {
         // Validations
+        $user = User::findOrFail($id);
+        $this->authorize($user);
         //Messages for validation
         $messages = [
             'name.required'     => 'El campo nombre es requerido.',
@@ -85,19 +90,11 @@ class MatchController extends Controller
 
 
         // Create Object and Save it
+        $data = $request->all();
         $match = new Match;
-        $match->name = $request->name;
-        $match->user_id = $id;
-        $match->players = $request->players;
-        $match->price = $request->price;
-        $match->hour = $match->convertTimeToSQL($request->hour);
-        $match->date = $match->convertDateToSQL($request->date);
-        $match->site = $request->site;
-        $match->lng = $request->lng;
-        $match->lat = $request->lat;
-        $match->info = $request->info;
-        $match->save(); 
-
+        $data['hour'] = $match->convertTimeToSQL($request->hour);
+        $data['date'] = $match->convertDateToSQL($request->date);
+        auth()->user()->matchs()->create($data);
 
         Alert::success('Mejenga Creada exitosamente.');
         $matches = Match::where('user_id', '=', $id)->paginate(5);

@@ -30,19 +30,10 @@ class RequestAdminController extends Controller
     public function store(Request $request)
 	{
 	    $validatedData = $request->validate([
-	         'name' => 'required|string|max:255',
-	         'email' => 'unique:request_admins',
 	         'message' => 'required|string',
 	    ]);
+        auth()->user()->request()->create($request->all());
 
-	    $requestAdmin = new RequestAdmin;
-
-        $requestAdmin->user_id = $request->id;
-	    $requestAdmin->name = $request->name;
-	    $requestAdmin->email = $request->email;
-        $requestAdmin->message = $request->message;
-
-        $requestAdmin->save();
         Alert::success('Solicituda enviada exitosamente.');
         return redirect()->back();
     }
@@ -53,19 +44,16 @@ class RequestAdminController extends Controller
 
     }
 
-    public function update(Request $request, $email)
+    public function update(Request $request, $id)
     {
-        $requestDB = RequestAdmin::where('email', '=', $email)->firstOrFail();
+        $requestDB = RequestAdmin::where('user_id', '=', $id)->firstOrFail();
         $requestDB->status = $request->status;
         $requestDB->save();
-
-        $user = User::where('email', $email)->firstOrFail();
-
-        DB::table('assigned_roles')->insert(
-            ['user_id' => $user->id, 'role_id' => 2]
-        );
+        if ($request->status === 'C') {
+            $requestDB->user->roles()->attach(2);     
+        }
         
-        Alert::success('Solicituda enviada exitosamente.');
+        Alert::success('Actualizado');
         return redirect()->back();
     }
 }

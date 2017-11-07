@@ -4,6 +4,8 @@ namespace Mejenguitas\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Mejenguitas\Policies\UserPolicy;
+use Mejenguitas\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Mejenguitas\Model' => 'Mejenguitas\Policies\ModelPolicy',
+        User::class => UserPolicy::Class,
     ];
 
     /**
