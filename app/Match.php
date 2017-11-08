@@ -13,8 +13,18 @@ class Match extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'players', 'price', 'hour', 'date', 'site', 'lat', 'lng'
+        'name', 'players', 'price', 'hour', 'date', 'site', 'lat', 'lng', 'info'
     ];
+
+    public function setHourAttribute($hour)
+    {
+      $this->attributes['hour'] = \DateTime::createFromFormat('h:iA', $hour)->format('H:i:s');
+    }
+
+    public function setDateAttribute($date)
+    {
+      $this->attributes['date'] = \DateTime::createFromFormat('d/m/Y', $date)->format('Y-m-d');
+    }
 
 
    public function convertDateToNormal($date){
@@ -23,14 +33,6 @@ class Match extends Model
 
    public function convertTimeToNormal($time){
    		return \DateTime::createFromFormat('H:i:s', $time)->format('h:iA');
-   }
-
-   public function convertDateToSQL($date){
-   		return \DateTime::createFromFormat('d/m/Y', $date)->format('Y-m-d');
-   }
-
-   public function convertTimeToSQL($time){
-   		return \DateTime::createFromFormat('h:iA', $time)->format('H:i:s');
    }
 
    public function convertTimestamp($date){

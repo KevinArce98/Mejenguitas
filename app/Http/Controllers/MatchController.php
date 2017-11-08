@@ -7,6 +7,7 @@ use Mejenguitas\Role;
 use Mejenguitas\User;
 use Mejenguitas\RequestAdmin;
 use Illuminate\Http\Request;
+use Mejenguitas\Http\Requests\MatchRequest;
 use Alert;
 use DB;
 
@@ -16,7 +17,7 @@ class MatchController extends Controller
       public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('roles:mod', ['except' => ['matchsJoined', 'index']]);
+        $this->middleware('roles:mod', ['except' => ['matchsJoined', 'index', 'show']]);
     }
     /**
      * Display a listing of the resource.
@@ -33,7 +34,8 @@ class MatchController extends Controller
     {
         $user = User::findOrFail($id);
         $this->authorize($user);
-        $matches = Match::where('user_id', '=', $id)->paginate(5);
+
+        $matches = $user->matchs()->paginate(5);
         return view('matchs.index', compact('matches'));
     }
 
@@ -52,52 +54,20 @@ class MatchController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Mejenguitas\Http\Requests\MatchRequest;
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(MatchRequest $request, $id)
     {
         // Validations
         $user = User::findOrFail($id);
         $this->authorize($user);
-        //Messages for validation
-        $messages = [
-            'name.required'     => 'El campo nombre es requerido.',
-            'name.string'       => 'El campo nombre tiene que ser texto.',
-            'players.required'  => 'El campo jugadores es requerido.',
-            'players.numeric'   => 'El campo jugadores tiene que ser numerico.',
-            'players.min'       => 'El campo jugadores tiene que ser mínimo 1.',
-            'price.required'    => 'El campo precio es requerido.',
-            'price.numeric'     => 'El campo precio tiene que ser numerico.',
-            'price.min'         => 'El campo precio tiene que ser mínimo 1.',
-            'hour.required'     => 'El campo hora es requerido.',
-            'date.required'     => 'El campo fecha es requerido.',
-            'site.required'     => 'El campo ubicación es requerido.',
-            'lat.required'      => 'El campo latitud es requerido.',
-            'lng.required'      => 'El campo longitud es requerido.',
-        ];
-        $rules = [
-            'name'    => 'required|string',
-            'players' => 'required|numeric|min:1',
-            'price'   => 'required|numeric|min:1',
-            'hour'    => 'required',
-            'date'    => 'required',
-            'site'    => 'required|string',
-            'lat'     => 'required',
-            'lng'     => 'required'
-        ];
-        $this->validate($request, $rules, $messages);
 
-
-        // Create Object and Save it
-        $data = $request->all();
-        $match = new Match;
-        $data['hour'] = $match->convertTimeToSQL($request->hour);
-        $data['date'] = $match->convertDateToSQL($request->date);
-        auth()->user()->matchs()->create($data);
+        //Save Model Match
+        auth()->user()->matchs()->create($request->all());
 
         Alert::success('Mejenga Creada exitosamente.');
-        $matches = Match::where('user_id', '=', $id)->paginate(5);
+        $matches = $user->matchs()->paginate(5);
         return redirect()->route('matchs.mymatchs', compact('id', 'matches'));
     }
 

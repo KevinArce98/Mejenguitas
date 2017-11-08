@@ -375,3 +375,27 @@ textarea {
     margin-top: 3px;
     margin-bottom: 3px;
 }
+
+
+/*
+*   Messages
+*/
+
+.br-message{
+    border: 1px solid #ADAAAA;
+    background-color: #D2D1D1;
+    padding-left: 7px;
+}
+.br-message:hover{
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+.from-name{
+    color: #028EDE;
+}
+.link-message:hover, .link-message:link{
+    text-decoration: none;
+}
+.br-message a h5{
+    color: #4a4a4a;
+}

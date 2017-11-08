@@ -3,6 +3,10 @@
 namespace Mejenguitas\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Mejenguitas\Message;
+use Alert;
+use Mail;
+use Mejenguitas\Events\MessageWasReceived;
 
 class MessageController extends Controller
 {
@@ -14,6 +18,11 @@ class MessageController extends Controller
     public function index()
     {
         return view('messages.index');
+    }
+    public function indexForUser()
+    {
+        $messages = Message::where('email_receive', auth()->user()->email )->get();
+        return view('messages.index', compact('messages'));
     }
 
     /**
@@ -33,8 +42,12 @@ class MessageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    { 
+        $msg = auth()->user()->messages()->create($request->all());
+        event(new MessageWasReceived($msg));
+        Alert::success('Mensaje Enviado.');
+        $messages = Message::where('email_receive', auth()->user()->email )->get();
+        return view('messages.index', compact('messages'));
     }
 
     /**
@@ -45,7 +58,7 @@ class MessageController extends Controller
      */
     public function show($id)
     {
-        //
+        $message = Message::find($id);
     }
 
     /**

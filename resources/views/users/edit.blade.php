@@ -18,7 +18,7 @@
         	<div class="row">
         		<div class="col-md-3">
 			        <div class="text-center">
-			          <img src="{{ auth()->user()->avatar != 'http://proyectolaravel.com/img/default.png' ? auth()->user()->url : '//placehold.it/100'}}" class="avatar img-circle" alt="avatar" id="imgAvatar" width="100px" height="100px">
+			          <img src="{{ auth()->user()->avatar != 'http://proyectolaravel.com/img/default.png' ? auth()->user()->url : 'http://proyectolaravel.com/img/default.png'}}" class="avatar img-circle" alt="avatar" id="imgAvatar" width="100px" height="100px">
 			          <h6>Sube una foto diferente ...</h6>
 			          <input type="file" class="form-control" name="avatar" id="avatar" required>
 			        </div>

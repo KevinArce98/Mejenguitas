@@ -30,7 +30,7 @@ Route::get('user/{id}/matchs/create', 'MatchController@create')->name('matchs.cr
 Route::post('matchs/{id}', 'MatchController@store')->name('matchs.store');
 Route::get('matchs/{id}', 'MatchController@show')->name('matchs.show');
 
-
+Route::get('messages', 'MessageController@indexForUser')->name('message.indexForUser');
 Route::resource('message', 'MessageController');
 
 Route::resource('user', 'UserController');

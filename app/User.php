@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Mejenguitas\Role;
 use Mejenguitas\RequestAdmin;
 use Mejenguitas\Match;
+use Mejenguitas\Message;
 
 class User extends Authenticatable
 {
@@ -31,6 +32,7 @@ class User extends Authenticatable
         'password', 'remember_token'
     ];
 
+    // Relationship
     public function roles(){
         return $this->belongsToMany(Role::class, 'assigned_roles');
     }
@@ -44,6 +46,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Match::class);    
     }
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+    // End Relationship
+
 
     public function hasRoles(array $roles)
     {

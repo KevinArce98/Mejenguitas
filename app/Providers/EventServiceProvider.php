@@ -13,8 +13,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Mejenguitas\Events\Event' => [
-            'Mejenguitas\Listeners\EventListener',
+          'Mejenguitas\Events\MessageWasReceived' => [
+            'Mejenguitas\Listeners\SendAutoresponder',
+            'Mejenguitas\Listeners\SendEmailToUser',
         ],
     ];
 
