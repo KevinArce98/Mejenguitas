@@ -7,7 +7,7 @@ Solicitudes
 @section('content')
 <div class="container">
 	<div class="row">
-		<h2 class="text-center">Solicitudes para ser administrador</h2>
+		<h2 class="text-center">Solicitudes para ser moderador</h2>
 			<hr>
 	</div>
 

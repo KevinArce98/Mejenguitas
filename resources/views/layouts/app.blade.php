@@ -112,7 +112,7 @@
                             @endif
                             @if(auth()->user()->requestHave(auth()->user()->id))        
                                 <li>
-                                    <a href="{{ route('requests.create') }}"><i class="fa fa-file-text" aria-hidden="true"></i> Solicitud Administrador</a>
+                                    <a href="{{ route('requests.create') }}"><i class="fa fa-file-text" aria-hidden="true"></i> Solicitud Moderador</a>
                                 </li>
                             @endif
                             @if(auth()->user()->isAdmin())
@@ -120,7 +120,7 @@
                                     <a href="{{ route('requests.index') }}"><i class="fa fa-files-o" aria-hidden="true"></i> Solicitudes Recibidas</a>
                                 </li>
                             <li>
-                                <a href="#"><i class="fa fa-history" aria-hidden="true"></i> Historial</a>
+                                <a href="{{ route('historial.index') }}"><i class="fa fa-history" aria-hidden="true"></i> Historial</a>
                             </li>
                             @endif
                         </ul>

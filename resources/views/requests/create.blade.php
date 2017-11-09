@@ -7,7 +7,7 @@ Formulario Solicitud
 @section('content')
 	<div class="container">
 		<div class="row">
-			<h2 class="col-md-10 col-md-offset-1">Solicitud para administrar mejengas</h2>
+			<h2 class="col-md-10 col-md-offset-1">Solicitud para moderar mejengas</h2>
 		</div>
 		<div class="row col-md-10 col-md-offset-1">
 			@if (session('alert'))

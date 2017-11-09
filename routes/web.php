@@ -35,4 +35,5 @@ Route::resource('message', 'MessageController');
 
 Route::resource('user', 'UserController');
 
+Route::get('historial', 'HistorialController@index')->name('historial.index');
 
