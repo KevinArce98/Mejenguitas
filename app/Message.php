@@ -13,11 +13,16 @@ class Message extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'email_receive', 'subject', 'body'
+        'user_id', 'email_receive', 'subject', 'body', 'read'
     ];
 
     public function user()
     {
     	return $this->belongsTo(User::class);
+    }
+
+    public function isRead($message)
+    {
+        return $message->read == true;
     }
 }

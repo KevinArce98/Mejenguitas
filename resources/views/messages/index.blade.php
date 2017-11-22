@@ -11,12 +11,24 @@
 	<div class="row">
 		<div class="col-md-6">
 			<h3>No Leídos</h3>
-			@forelse($messages as $message)
-				<div class="br-message">
-					<a href="#" class="link-message">
+			@forelse($messagesUnread as $message)
+				<div class="notice notice-warning">
+					<a href="{{ route('message.show', $message->id) }}" class="link-message">
 						<h4 class="from-name">{{ $message->user->name }}</h4>
-						<h5>{{ $message->subject }}</h5>
+						<hr>
+						<h5 class="subject-message"><span class="subject-color">Asunto:</span> {{ $message->subject }}</h5>
 					</a>
+					<div class="options-messages">
+						<form action="{{ route('message.markAsRead', ['id' => $message->id, 'read' => 1]) }}" method="post">
+							{{ csrf_field() }}
+							<button type="submit" class="btn btn-sm btn-info">Marcar como leído</button>
+						</form>
+						<form action="{{ route('message.destroy', $message->id) }}" method="post" class="ml">
+							{{ csrf_field() }}
+							{{ method_field('DELETE') }}
+							<button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+						</form>
+					</div>
 				</div>
 			@empty
 				<p>No tienes mensajes sin leer</p>
@@ -24,6 +36,28 @@
 		</div>
 		<div class="col-md-6">
 			<h3>Leídos</h3>
+			@forelse($messagesRead as $message)
+				<div class="notice notice-info">
+					<a href="{{ route('message.show', $message->id) }}" class="link-message">
+						<h4 class="from-name">{{ $message->user->name }}</h4>
+						<hr>
+						<h5 class="subject-message"><span class="subject-color">Asunto:</span> {{ $message->subject }}</h5>
+					</a>
+					<div class="options-messages">
+						<form action="{{ route('message.markAsUnRead', ['id' => $message->id, 'read' => 0]) }}" method="post">
+							{{ csrf_field() }}
+							<button type="submit" class="btn btn-sm btn-warning">Marcar como no leído</button>
+						</form>
+						<form action="{{ route('message.destroy', $message->id) }}" method="post" class="ml">
+							{{ csrf_field() }}
+							{{ method_field('DELETE') }}
+							<button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+						</form>
+					</div>
+				</div>
+			@empty
+				<p>No tienes mensajes leídos</p>
+			@endforelse
 		</div>
 	</div>
 </div>

@@ -56,7 +56,11 @@
                                 <li><a href="{{ route('login') }}"><i class="fa fa-lock" aria-hidden="true"></i> Iniciar Sesi&oacute;n</a></li>
                                 <li><a href="{{ route('register') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> Registro</a></li>
                             @else
-                                <li><a href="{{ route('message.indexForUser') }}">Notificaciones <span class="badge">2</span></a></li>
+                                <li><a href="{{ route('message.indexForUser') }}">Notificaciones
+                                    @if(Auth::user()->messagesUnread(Auth::user()->email) != 0)
+                                     <span class="badge">{{ Auth::user()->messagesUnread(Auth::user()->email) }}</span>
+                                    @endif
+                                </a></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                         {{ Auth::user()->name }} <span class="caret"></span>
@@ -93,7 +97,7 @@
                              <h4 id="nameUser">{{ Auth::user()->name }}</h4>
                              <div>
                                 <a href="{{ route('user.edit', auth()->user()->id) }}" class="btn Add-friend">
-                                  <i class="fa fa-pencil" aria-hidden="true"></i> Edit Profile
+                                  <i class="fa fa-pencil" aria-hidden="true"></i> Editar Perfil
                                 </a>
                               </div>
                          </div>

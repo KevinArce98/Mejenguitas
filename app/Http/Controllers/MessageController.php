@@ -10,6 +10,11 @@ use Mejenguitas\Events\MessageWasReceived;
 
 class MessageController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,8 +26,9 @@ class MessageController extends Controller
     }
     public function indexForUser()
     {
-        $messages = Message::where('email_receive', auth()->user()->email )->get();
-        return view('messages.index', compact('messages'));
+        $messagesUnread = Message::where(['email_receive' => auth()->user()->email, 'read' => 0])->orderBy('created_at','asc')->get();
+        $messagesRead = Message::where(['email_receive' => auth()->user()->email, 'read' => 1])->orderBy('created_at','asc')->get();
+        return view('messages.index', compact('messagesUnread','messagesRead'));
     }
 
     /**
@@ -46,8 +52,9 @@ class MessageController extends Controller
         $msg = auth()->user()->messages()->create($request->all());
         event(new MessageWasReceived($msg));
         Alert::success('Mensaje Enviado.');
-        $messages = Message::where('email_receive', auth()->user()->email )->get();
-        return view('messages.index', compact('messages'));
+       $messagesUnread = Message::where(['email_receive' => auth()->user()->email, 'read' => 0])->orderBy('created_at','asc')->get();
+        $messagesRead = Message::where(['email_receive' => auth()->user()->email, 'read' => 1])->orderBy('created_at','asc')->get();
+        return view('messages.index', compact('messagesUnread','messagesRead'));
     }
 
     /**
@@ -59,6 +66,8 @@ class MessageController extends Controller
     public function show($id)
     {
         $message = Message::find($id);
+        $this->authorize('show', $message);
+        return view('messages.show', compact('message'));
     }
 
     /**
@@ -70,6 +79,24 @@ class MessageController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    public function markAsRead($id, $read)
+    {
+        $message = Message::find($id);
+        $this->authorize('show', $message);
+        $message->read = 1;
+        $message->save();
+        return redirect()->back();
+    }
+
+    public function markAsUnRead($id, $read)
+    {
+        $message = Message::find($id);
+        $this->authorize('show', $message);
+        $message->read = 0;
+        $message->save();
+        return redirect()->back();
     }
 
     /**
@@ -92,6 +119,9 @@ class MessageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $message = Message::find($id);
+        $this->authorize('show', $message);
+        $message->delete();
+        return redirect()->back();
     }
 }

@@ -62,8 +62,16 @@ Mostrar Mejenga
       <input type="text" class="form-control" value="{{ $match->convertTimestamp($match->created_at) }}" readonly>
     </div>
   </div>
-
-
+  @if($match->players > count($match->users))
+    <div class="row text-center">
+      <a href="{{ route('matchs.join', $match->id) }}" class="btn btn-success">Unirse a la Mejenga</a>
+    </div>
+  @else
+    <div class="row text-center">
+      <h3 style="color: #B40808;">Ya están todos los jugadores para ésta mejenga</h3>
+    </div>
+  @endif
+  
 </div>
 @endsection
 

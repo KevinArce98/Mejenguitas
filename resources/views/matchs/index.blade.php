@@ -35,14 +35,14 @@ Mis Mejengas
 				</thead>
 				<tbody>
 					@forelse($matches as $match)
-						<tr>
+						<tr id="{{ $match->id }}" href="{{ route('matchs.players', $match->id) }}">
 							<td>{{ $match->name }}</td>
 							<td>{{ $match->site }}</td>
 							<td>{{ $match->players }}</td>
 							<td>₡ {{ $match->price }}</td>
 							<td>{{ $match->convertDateToNormal($match->date) }}</td>
 							<td>{{ $match->convertTimeToNormal($match->hour) }}</td>
-							<td>{{ $match->info }}</td>
+							<td>{{ $match->info ? $match->info : '¡No tiene información adicional!'}}</td>
 						</tr>
 					@empty
 					    <tr>
@@ -71,4 +71,5 @@ Mis Mejengas
 			});
 	    </script>
 	@endif
+	<script src="{{asset('js/home.js')}}"></script>
 @endsection

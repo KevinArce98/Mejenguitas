@@ -17,7 +17,7 @@ class MatchController extends Controller
       public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('roles:mod', ['except' => ['matchsJoined', 'index', 'show']]);
+        $this->middleware('roles:mod', ['except' => ['matchsJoined', 'index', 'show', 'joinToMatch']]);
     }
     /**
      * Display a listing of the resource.
@@ -26,7 +26,9 @@ class MatchController extends Controller
      */
     public function index()
     {
-        $matches = Match::paginate(10);
+
+        $matches = Match::where('user_id','!=', auth()->user()->id)->paginate(10);
+      
         return view('home', compact('matches'));
     }
 
@@ -83,6 +85,26 @@ class MatchController extends Controller
         return view('matchs.show', compact('match'));
     }
 
+    /*
+    *
+    *
+    *
+    */
+    public function joinToMatch($id)
+    {
+        $match = Match::findOrFail($id);
+        if ($match->players > count($match->users)) {
+            auth()->user()->matchsJoined()->attach($match->id);
+            return 'hecho';     
+        }
+        return 'no se unió';
+    }
+
+    public function showPlayers($id)
+    {
+       $match = Match::findOrFail($id);
+       return view('matchs.playersMatch', compact('match'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -116,9 +138,15 @@ class MatchController extends Controller
     {
         //
     }
+    public function pushOut($match, $user_id)
+    {
+        DB::delete('DELETE FROM `assigned_matchs` WHERE user_id = ? AND match_id = ?', [$user_id, $match]);
+        return redirect()->back();
+    }
 
     public function matchsJoined()
     {
-        return view('matchs.matchsJoined');
+        $matchs = auth()->user()->matchsJoined;   
+        return view('matchs.matchsJoined', compact('matchs'));
     }
 }

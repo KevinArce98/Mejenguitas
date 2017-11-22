@@ -20,7 +20,7 @@
 			        <div class="text-center">
 			          <img src="{{ auth()->user()->avatar != 'http://proyectolaravel.com/img/default.png' ? auth()->user()->url : 'http://proyectolaravel.com/img/default.png'}}" class="avatar img-circle" alt="avatar" id="imgAvatar" width="100px" height="100px">
 			          <h6>Sube una foto diferente ...</h6>
-			          <input type="file" class="form-control" name="avatar" id="avatar" required>
+			          <input type="file" class="form-control" name="avatar" id="avatar">
 			        </div>
 			      </div>
 				<div class="col-md-9">
@@ -60,4 +60,15 @@
 @section('scripts')
 	<script src="{{ asset('js/showImage.js') }}"></script>
 	<script >console.log($('#avatar'));</script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	@if (Session::has('sweet_alert.alert'))
+	    <script>
+	        swal({
+			  title: "¡Genial!",
+			  text: "Perfil Actualizado",
+			  icon: "success",
+			  timer: 4000,
+			});
+	    </script>
+	@endif
 @endsection

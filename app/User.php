@@ -9,6 +9,7 @@ use Mejenguitas\Role;
 use Mejenguitas\RequestAdmin;
 use Mejenguitas\Match;
 use Mejenguitas\Message;
+use DB as DATA;
 
 class User extends Authenticatable
 {
@@ -50,8 +51,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class);
     }
-    // End Relationship
 
+    public function matchsJoined(){
+        return $this->belongsToMany(Match::class, 'assigned_matchs');
+    }
+
+    public function matchsNotJoined()
+    {
+        return Match::whereHas('assigned_matchs', function($q){
+                $q->where('assigned_matchs', '!=', auth()->user()->id);
+            })->get();
+        return $this->belongsToMany(Match::class, 'assigned_matchs')->wherePivot('user_id', '!=', $this->id);
+    }
+    // End Relationship
 
     public function hasRoles(array $roles)
     {
@@ -95,5 +107,9 @@ class User extends Authenticatable
         }
 
         return '/img/users/' . $this->avatar;
+    }
+    public function messagesUnread($email)
+    {
+        return DATA::table('messages')->where(['email_receive' => $email, 'read' => 0])->count();;
     }
 }

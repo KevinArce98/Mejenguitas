@@ -1,0 +1,18 @@
+.alert{
+  margin-top: 100px;
+
+  border-left: 7px solid #07BA5F;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  border-top: 2px solid #1672B2;
+  border-right: 2px solid #1672B2;
+  border-bottom: 2px solid #1672B2;
+}
+.alert-title{
+  margin-top: 5px;
+  font-size: 1.7em;
+}
+.alert-container{
+  
+  color: #096E63;
+}

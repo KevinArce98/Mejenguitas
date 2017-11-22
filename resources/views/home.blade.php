@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title')
+Principal
+@endsection
 @section('content')
 <div class="container">
     <div class="row">
@@ -33,12 +36,11 @@
                     </thead>
                     <tbody>
                         @forelse ($matches as $match)
-
-                            <tr id="{{ $match->id }}" href="{{ route('matchs.show', $match->id) }}">
-                                <td>{{ $match->name }}</td>
-                                <td>{{ $match->site }}</td>
-                                <td>{{ $match->convertDateToNormal($match->date) }}</td>
-                            </tr>
+                                <tr id="{{ $match->id }}" href="{{ route('matchs.show', $match->id) }}">
+                                    <td>{{ $match->name }}</td>
+                                    <td>{{ $match->site }}</td>
+                                    <td>{{ $match->convertDateToNormal($match->date) }}</td>
+                                </tr>
                          @empty
                         <tr>
                             <td colspan="3">No Hay Registros</td>

@@ -55,9 +55,17 @@
 	    				</tr>
 	    			</thead>
 	    			<tbody>
-	    				<tr>
-	    					<td colspan="3">No hay registros</td>
-	    				</tr>
+	    				@forelse($matchs as $match)
+							<tr id="{{ $match->id }}" href="{{ route('matchs.show', $match->id) }}">
+		    					<td>{{ $match->name }}</td>
+		    					<td>{{ $match->convertDateToNormal($match->date) }}</td>
+		    					<td>{{ $match->convertTimeToNormal($match->hour) }}</td>
+		    				</tr>
+	    				@empty
+		    				<tr>
+		    					<td colspan="3">No hay registros</td>
+		    				</tr>
+	    				@endforelse
 	    			</tbody>
 	    		</table>
 	    	</div>
@@ -106,5 +114,6 @@
 		    autoclose: true
 		});
 	</script>
+	<script src="{{ asset('js/home.js') }}"></script>
 @endsection
 

@@ -29,9 +29,14 @@ Route::get('matchs/joined', 'MatchController@matchsJoined')->name('matchs.matchs
 Route::get('user/{id}/matchs/create', 'MatchController@create')->name('matchs.create');
 Route::post('matchs/{id}', 'MatchController@store')->name('matchs.store');
 Route::get('matchs/{id}', 'MatchController@show')->name('matchs.show');
+Route::get('matchs/{id}/join', 'MatchController@joinToMatch')->name('matchs.join');
+Route::get('matchs/{id}/players', 'MatchController@showPlayers')->name('matchs.players');
+Route::post('matchs/{match}/players/{id}', 'MatchController@pushOut')->name('matchs.pushOut');
 
 Route::get('messages', 'MessageController@indexForUser')->name('message.indexForUser');
 Route::resource('message', 'MessageController');
+Route::post('message/markasread/{id}/{read}', 'MessageController@markAsRead')->name('message.markAsRead');
+Route::post('message/markasunread/{id}/{read}', 'MessageController@markAsUnRead')->name('message.markAsUnRead');
 
 Route::resource('user', 'UserController');
 

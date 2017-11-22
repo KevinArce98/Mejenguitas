@@ -5,6 +5,7 @@ namespace Mejenguitas\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Mejenguitas\User;
+use Alert;
 
 class UserController extends Controller
 {
@@ -54,7 +55,8 @@ class UserController extends Controller
        $user->name = $request->name;
        $user->phone = $request->phone;
        $user->save();
-       return "hecho";
+        Alert::success('Actualizado.');
+       return view('users.edit');
     }
 
     public function destroy($id)

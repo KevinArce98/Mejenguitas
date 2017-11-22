@@ -19,8 +19,8 @@ class CreateMessagesTable extends Migration
             $table->string('email_receive');
             $table->string('subject');
             $table->longText('body');
+            $table->boolean('read')->default(0);
             $table->timestamps();
-
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('email_receive')->references('email')->on('users');
         });

@@ -27,15 +27,19 @@ class Match extends Model
     }
 
 
-   public function convertDateToNormal($date){
-   		return \DateTime::createFromFormat('Y-m-d', $date)->format('d/m/Y');
-   }
+    public function convertDateToNormal($date){
+     	return \DateTime::createFromFormat('Y-m-d', $date)->format('d/m/Y');
+    }
 
-   public function convertTimeToNormal($time){
-   		return \DateTime::createFromFormat('H:i:s', $time)->format('h:iA');
-   }
+    public function convertTimeToNormal($time){
+     	return \DateTime::createFromFormat('H:i:s', $time)->format('h:iA');
+    }
 
-   public function convertTimestamp($date){
-         return \DateTime::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y h:iA');
-   }
+    public function convertTimestamp($date){
+          return \DateTime::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y h:iA');
+    }
+
+    public function users(){
+       return $this->belongsToMany(User::class, 'assigned_matchs');
+    }
 }

@@ -101,6 +101,10 @@ div.datepicker.datepicker-dropdown.dropdown-menu{
     -moz-box-shadow: 0px 0px 13px 1px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 13px 1px rgba(0,0,0,0.75);
 }
+
+.ml {
+  margin-left: 5px !important;
+}
 /* CSS NavBar */
 
 .navbar-default{
@@ -381,21 +385,87 @@ textarea {
 *   Messages
 */
 
-.br-message{
-    border: 1px solid #ADAAAA;
-    background-color: #D2D1D1;
-    padding-left: 7px;
-}
-.br-message:hover{
-    background-color: #FFFFFF;
-    cursor: pointer;
-}
 .from-name{
-    color: #028EDE;
+    color: #1084CE;
+    margin-bottom: 0px;
 }
 .link-message:hover, .link-message:link{
     text-decoration: none;
 }
-.br-message a h5{
-    color: #4a4a4a;
+
+.subject-message{
+    color: #151313;
+}
+.subject-color{
+    color: #FF0000;
+}
+.options-messages{
+    display: flex;
+    text-align: right;
+    justify-content: flex-end!important;
+}
+
+a hr{
+ margin-top: 1px;
+ margin-bottom: 8px;
+ background: #80D651  !important;
+}
+.notice:hover{
+    background-color: #F6F6F6;
+    -webkit-box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.75);
+}
+.notice {
+    padding: 15px;
+    background-color: #FFFFFF;
+    border-left: 6px solid #7f7f84;
+    margin-bottom: 25px;
+    -webkit-box-shadow: 0px 0px 17px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 17px -6px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 17px -6px rgba(0,0,0,0.75);
+}
+.notice-success {
+    border-color: #80D651;
+}
+.notice-success>strong {
+    color: #80D651;
+}
+.notice-info {
+    border-color: #45ABCD;
+}
+.notice-info>strong {
+    color: #45ABCD;
+}
+.notice-warning {
+    border-color: #FEAF20;
+}
+.notice-warning>strong {
+    color: #FEAF20;
+}
+.notice-danger {
+    border-color: #d73814;
+}
+.notice-danger>strong {
+    color: #d73814;
+}
+
+.msg-panel{
+    text-align: center;
+    background-color: #FFFFFF;
+    -webkit-box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.75);
+    margin-bottom: 15px;
+    padding:25px;
+    border-radius: 10px;
+}
+.msg-panel h2{
+    margin-top:0px;
+    color: #05B367;
+}
+
+.msg-panel h3{
+
+    color: #08623B;
 }
