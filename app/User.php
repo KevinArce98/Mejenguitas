@@ -55,7 +55,6 @@ class User extends Authenticatable
     public function matchsJoined(){
         return $this->belongsToMany(Match::class, 'assigned_matchs');
     }
-
     public function matchsNotJoined()
     {
         return Match::whereHas('assigned_matchs', function($q){
@@ -68,6 +67,13 @@ class User extends Authenticatable
     public function hasRoles(array $roles)
     {
         return $this->roles->pluck('name')->intersect($roles)->count();
+    }
+
+    public function hasMatchJoined($match_id)
+    {
+      return DB::table('assigned_matchs')->where([
+                    ['user_id', '=', auth()->user()->id],
+                    ['match_id', '=', $match_id]])->count();
     }
 
     public function isAdmin()

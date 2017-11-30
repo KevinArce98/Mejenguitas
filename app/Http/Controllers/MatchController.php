@@ -26,7 +26,6 @@ class MatchController extends Controller
      */
     public function index()
     {
-
         $matches = Match::where('user_id','!=', auth()->user()->id)->paginate(10);
       
         return view('home', compact('matches'));
@@ -85,6 +84,12 @@ class MatchController extends Controller
         return view('matchs.show', compact('match'));
     }
 
+    public function search(Request $request)
+    {
+        $matches = Match::name($request->name)->site($request->site)->date($request->date)->where('user_id','!=', auth()->user()->id)->paginate(10);
+        return view('home', compact('matches'));   
+    }
+
     /*
     *
     *
@@ -95,9 +100,11 @@ class MatchController extends Controller
         $match = Match::findOrFail($id);
         if ($match->players > count($match->users)) {
             auth()->user()->matchsJoined()->attach($match->id);
-            return 'hecho';     
+            $doIt = 1;
+            $match = Match::findOrFail($id);
+            return view('matchs.show', compact('match', 'doIt')); 
         }
-        return 'no se unió';
+        return redirect()->back();
     }
 
     public function showPlayers($id)
@@ -134,10 +141,33 @@ class MatchController extends Controller
      * @param  \Mejenguitas\Match  $match
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Match $match)
+    public function destroy($match_id)
     {
-        //
+        /* VERIFICACION DE HORA  */
+        $match = Match::findOrFail($match_id);
+        $actual = new \DateTime('now');
+        $dateMatch = new \DateTime($match->date.' '.$match->hour);
+        $intervalo = $actual->diff($dateMatch);
+
+        $minutes = (int) $intervalo->format('%i');
+        if ($actual < $dateMatch) {
+            if ($minutes > 30) {
+                DB::delete('DELETE FROM `assigned_matchs` WHERE user_id = ? AND match_id = ?', [auth()->user()->id, $match_id]);
+                $matchs = auth()->user()->matchsJoined;   
+                $doIt = 1;
+                return view('matchs.matchsJoined', compact('matchs', 'doIt')); 
+            }else{
+                $matchs = auth()->user()->matchsJoined;  
+                $doIt = 0;
+                return view('matchs.matchsJoined', compact('matchs', 'doIt'));
+            }
+        }elseif ($actual > $dateMatch || $actual == $dateMatch) {
+            $matchs = auth()->user()->matchsJoined;  
+            $doIt = 0;
+            return view('matchs.matchsJoined', compact('matchs', 'doIt'));
+        } 
     }
+
     public function pushOut($match, $user_id)
     {
         DB::delete('DELETE FROM `assigned_matchs` WHERE user_id = ? AND match_id = ?', [$user_id, $match]);

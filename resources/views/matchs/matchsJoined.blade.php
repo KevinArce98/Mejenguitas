@@ -11,8 +11,20 @@
 @section('content')
 	<div class="container">
 		<div class="row">
+			@if(isset($doIt))
+				<div class="{{ $doIt ? 'alert-success ' : 'alert-danger ' }} text-center">
+					@if($doIt)
+						Se ha eliminado la mejenga de tu lista	
+					@else
+						No se ha podido eliminar la mejenga de tu lista
+						***La mejenga está a 30min o menos, o ya ha iniciado***	
+					@endif
+				</div>
+			@endif
+		</div>
+		<div class="row">
 	        <div class="col-md-4">
-	            <form action="#" method="POST" role="form" class="form-inline">
+	            <form action="{{ route('matchs.search') }}" method="GET" role="form" class="form-inline" role="search">
 	                <h3>Buscar en mis mejengas</h3>
 	                <label class="radio-inline"><input type="radio" name="optradio" checked>Nombre</label>
 					<label class="radio-inline"><input type="radio" name="optradio">Ubicación</label>
@@ -33,7 +45,7 @@
 						<div class="form-group top bottom">
 							<label for="date" class="control-label">Fecha:</label>
 							<div class="input-group date">
-							  <input type="text" class="form-control" name="date" value="{{ date("d/m/Y") }}"><span class="input-group-addon" readonly><i class="fa fa-calendar" aria-hidden="true"></i></span>
+							  <input type="text" class="form-control" name="date" ><span class="input-group-addon" readonly><i class="fa fa-calendar" aria-hidden="true"></i></span>
 							</div>
 						</div>
 					</div>
@@ -87,6 +99,9 @@
 		    $('#nameDiv').css('display', 'none');
 		    $('#siteDiv').css('display', 'none');
 		    $('#dateDiv').css('display', 'none');
+		    $('#name').val('');
+		    $('#date').val('');
+		    $('#site').val('');
 
 		    switch(this.innerText) {
 			    case 'Nombre':

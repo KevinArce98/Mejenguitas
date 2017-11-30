@@ -42,4 +42,24 @@ class Match extends Model
     public function users(){
        return $this->belongsToMany(User::class, 'assigned_matchs');
     }
+
+    public function scopeName($query, $name)
+    {
+        if (trim($name) != "") {
+            $query->where('name', 'LIKE', "%$name%");
+        }
+    }
+    public function scopeDate($query, $date)
+    {
+        if (trim($date) != "") {
+            $new = \DateTime::createFromFormat('d/m/Y', $date)->format('Y-m-d');
+            $query->where('date', $new);
+        }
+    }
+    public function scopeSite($query, $site)
+    {
+        if (trim($site) != "") {
+            $query->where('site', 'LIKE', "%$site%");
+        }
+    }
 }

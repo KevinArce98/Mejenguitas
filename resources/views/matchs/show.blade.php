@@ -4,6 +4,11 @@ Mostrar Mejenga
 @endsection
 @section('content')
 <div class="container">
+  @if(isset($doIt))
+    <div class="alert-success text-center">
+        Te uniste a la mejenga "{{ $match->name }}"
+    </div>
+  @endif
 	<h2>Mejenga "{{ $match->name }}"</h2>
 	<hr>
   <div class="form-group row">
@@ -62,14 +67,20 @@ Mostrar Mejenga
       <input type="text" class="form-control" value="{{ $match->convertTimestamp($match->created_at) }}" readonly>
     </div>
   </div>
-  @if($match->players > count($match->users))
-    <div class="row text-center">
-      <a href="{{ route('matchs.join', $match->id) }}" class="btn btn-success">Unirse a la Mejenga</a>
-    </div>
+  @if(auth()->user()->hasMatchJoined($match->id))
+      <div class="row text-center">
+        <a href="{{ route('matchs.destroy', $match->id) }}" class="btn btn-danger">Salir de la Mejenga</a>
+      </div>
   @else
-    <div class="row text-center">
-      <h3 style="color: #B40808;">Ya están todos los jugadores para ésta mejenga</h3>
-    </div>
+    @if($match->players > count($match->users))
+      <div class="row text-center">
+        <a href="{{ route('matchs.join', $match->id) }}" class="btn btn-success">Unirse a la Mejenga</a>
+      </div>
+    @else
+      <div class="row text-center">
+        <h3 style="color: #B40808;">Ya están todos los jugadores para ésta mejenga</h3>
+      </div>
+    @endif
   @endif
   
 </div>

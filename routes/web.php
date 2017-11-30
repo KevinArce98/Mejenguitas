@@ -28,10 +28,13 @@ Route::get('user/{id}/matchs/index', 'MatchController@indexForUser')->name('matc
 Route::get('matchs/joined', 'MatchController@matchsJoined')->name('matchs.matchsJoined');
 Route::get('user/{id}/matchs/create', 'MatchController@create')->name('matchs.create');
 Route::post('matchs/{id}', 'MatchController@store')->name('matchs.store');
+Route::get('matchs/search', 'MatchController@search')->name('matchs.search');
 Route::get('matchs/{id}', 'MatchController@show')->name('matchs.show');
 Route::get('matchs/{id}/join', 'MatchController@joinToMatch')->name('matchs.join');
 Route::get('matchs/{id}/players', 'MatchController@showPlayers')->name('matchs.players');
 Route::post('matchs/{match}/players/{id}', 'MatchController@pushOut')->name('matchs.pushOut');
+Route::get('matchs/{id}/destroy', 'MatchController@destroy')->name('matchs.destroy');
+
 
 Route::get('messages', 'MessageController@indexForUser')->name('message.indexForUser');
 Route::resource('message', 'MessageController');
