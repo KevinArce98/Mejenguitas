@@ -23,37 +23,8 @@
 			@endif
 		</div>
 		<div class="row">
-	        <div class="col-md-4">
-	            <form action="{{ route('matchs.search') }}" method="GET" role="form" class="form-inline" role="search">
-	                <h3>Buscar en mis mejengas</h3>
-	                <label class="radio-inline"><input type="radio" name="optradio" checked>Nombre</label>
-					<label class="radio-inline"><input type="radio" name="optradio">Ubicación</label>
-					<label class="radio-inline"><input type="radio" name="optradio">Fecha</label>
-					<div id="nameDiv">
-						<div class="form-group top bottom">
-		                    <label for="name" class="control-label">Nombre</label>
-		                    <input type="text" class="form-control" id="name" name="name" placeholder="Filtar Nombres">
-		                </div>
-					</div>
-	                <div id="siteDiv">
-						<div class="form-group top bottom">
-		                    <label for="site" class="control-label">Ubicación</label>
-		                    <input type="text" class="form-control" id="site" name="site" placeholder="Filtar Ubicación">
-		                </div>
-					</div>
-					 <div id="dateDiv">
-						<div class="form-group top bottom">
-							<label for="date" class="control-label">Fecha:</label>
-							<div class="input-group date">
-							  <input type="text" class="form-control" name="date" ><span class="input-group-addon" readonly><i class="fa fa-calendar" aria-hidden="true"></i></span>
-							</div>
-						</div>
-					</div>
-	                <div class="form-group">
-	                    <button type="submit" class="btn btn-outline-info">Buscar</button>
-	                </div>
-	            </form>
-	        </div>
+	            <h2>Mejengas Unido</h2>
+	        <hr>
 	    </div>
 	    <div class="row top">
 	    	<p class="help-text">Selecciona una mejenga para ver más detalles.</p>

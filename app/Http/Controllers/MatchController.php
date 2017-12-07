@@ -26,8 +26,10 @@ class MatchController extends Controller
      */
     public function index()
     {
-        $matches = Match::where('user_id','!=', auth()->user()->id)->paginate(10);
-      
+        $id = auth()->user()->id;
+
+        $matches = DB::select('SELECT DISTINCT matches.* FROM matches, assigned_matchs WHERE matches.user_id != ? AND assigned_matchs.user_id != ? AND matches.id NOT IN (SELECT match_id FROM assigned_matchs WHERE user_id = ?)', [$id, $id, $id]);
+        
         return view('home', compact('matches'));
     }
 
@@ -99,10 +101,18 @@ class MatchController extends Controller
     {
         $match = Match::findOrFail($id);
         if ($match->players > count($match->users)) {
+            $aux = false;
+            foreach (auth()->user()->matchsJoined as $matchJoin) {
+                $dateMatchNew = new \DateTime($match->date.' '.$match->match);
+                $dateMatchOld = new \DateTime($matchJoin->date.' '.$match->matchJoin);
+                if ($dateMatchNew == $dateMatchOld) {
+                    return redirect()->back();
+                }
+            }
             auth()->user()->matchsJoined()->attach($match->id);
             $doIt = 1;
             $match = Match::findOrFail($id);
-            return view('matchs.show', compact('match', 'doIt')); 
+            return view('matchs.show', compact('match', 'doIt'));
         }
         return redirect()->back();
     }

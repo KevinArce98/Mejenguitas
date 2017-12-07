@@ -43,5 +43,3 @@ Route::post('message/markasunread/{id}/{read}', 'MessageController@markAsUnRead'
 
 Route::resource('user', 'UserController');
 
-Route::get('historial', 'HistorialController@index')->name('historial.index');
-

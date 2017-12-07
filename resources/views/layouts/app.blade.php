@@ -123,9 +123,6 @@
                                 <li>
                                     <a href="{{ route('requests.index') }}"><i class="fa fa-files-o" aria-hidden="true"></i> Solicitudes Recibidas</a>
                                 </li>
-                            <li>
-                                <a href="{{ route('historial.index') }}"><i class="fa fa-history" aria-hidden="true"></i> Historial</a>
-                            </li>
                             @endif
                         </ul>
                     </div>

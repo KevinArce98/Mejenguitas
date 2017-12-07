@@ -66,9 +66,6 @@ Principal
                     </tbody>
                 </table>
             </div>
-            <div class="row text-center">
-                {{ $matches->links() }}
-            </div>
     </div>
 </div>
 @endsection
